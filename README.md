@@ -16,3 +16,14 @@
 - for read only operation use useRecoilValue
 - for update operation use  useSetRecoilState - dont mention count, use exisitngCount
 - If count is mentioned the react assumes the component wants to re-render the component
+
+```
+setCount(existingCount => existingCount - 1)
+OR
+setCount(function (existingCount){
+      return  existingCount - 1
+}
+```
+one line statement - it gives the setCount function a function as an input and the argument to the function wll be the current value.
+How does the existingCount value reaches here?
+-= we are passing on function as argument to other function. setcount either can take the state i.e. new State OR setcount takes the funtion, whatever this function returns it sets to the new state value and also gives the first argument as current value of that thing.
