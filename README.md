@@ -1,12 +1,18 @@
-# React + Vite
+# State Management using useState, useContext and Recoil
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## useState 
+- pass props from parent component to child component which casuses prop drilling and re-rendering of all component
 
-Currently, two official plugins are available:
+## useContext
+- wrap your App in Context.Provider and pass state in value attribute
+- createContext outside of your App component
+- useContext in the child component where state is required
+- it solves thr prop drilling but re-rendering issue persists.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## recoil
+- it is an external state management library
+- wrap your app in RecoilRoot
+- create an atom outside the app which stores the state
+- for read only operation use useRecoilValue
+- for update operation use  useSetRecoilState - dont mention count, use exisitngCount
+- If count is mentioned the react assumes the component wants to re-render the component
