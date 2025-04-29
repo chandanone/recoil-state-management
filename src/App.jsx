@@ -1,36 +1,46 @@
 import { Button, Card, Typography } from '@mui/material'
 import './App.css'
 import { useState } from 'react'
+import { createContext } from 'react';
+import { useContext } from 'react';
+
+const CountContext = createContext();
 
 export default function App() {
   const [count, setCount] = useState(0);
   return (
-    <Card variant='elevation' style={{
+    <CountContext.Provider value={{
+      count: count,
+      setCount: setCount
+    }}>
+      <Card variant='elevation' style={{
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      gap: 30
+      gap: 30, 
     }}>
       <Typography variant='h3'>Welcome to Counter App!</Typography>
-      <Buttons count={count} setCount={setCount} />
-      <CountComponent count={count} />
+      <Buttons />
+      <CountComponent />
     </Card>
+    </CountContext.Provider>
   )
 }
 
-function Buttons({count, setCount}) {
+function Buttons() {
   return (
     <div className='buttons' style={{
       display: "flex",
       gap: 40
     }}>
-      <Increase count={count} setCount={setCount} />
-      <Decrease count={count} setCount={setCount} />
+      <Increase />
+      <Decrease />
     </div>
   )
 }
 
-function Increase({count, setCount}) {
+function Increase() {
+  const {count, setCount}= useContext(CountContext)
   return (
     <Button variant='contained' onClick={()=>{
       setCount(count+1)
@@ -41,7 +51,8 @@ function Increase({count, setCount}) {
   )
 }
 
-function Decrease({count, setCount}) {
+function Decrease() {
+  const {count, setCount} = useContext(CountContext)
   return (
     <Button variant='contained' onClick={()=>{
       setCount(count-1)
@@ -49,7 +60,8 @@ function Decrease({count, setCount}) {
   )
 }
 
-function CountComponent({count}) {
+function CountComponent() {
+  const {count} = useContext(CountContext)
   return (
     <Typography variant='h5'>{count}</Typography>
   )
