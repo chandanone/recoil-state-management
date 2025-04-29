@@ -27,3 +27,17 @@ setCount(function (existingCount){
 one line statement - it gives the setCount function a function as an input and the argument to the function wll be the current value.
 How does the existingCount value reaches here?
 -= we are passing on function as argument to other function. setcount either can take the state i.e. new State OR setcount takes the funtion, whatever this function returns it sets to the new state value and also gives the first argument as current value of that thing.
+
+```
+function Decrease() {
+  const setCount = useSetRecoilState(CountState)
+  return (
+    <Button variant='contained' onClick={()=>{
+      setCount(existingCount => existingCount - 1)
+    }}>Decrease</Button>
+  )
+}
+```
+
+- React will think that, Decrease component needs the value of count, it will think it might use it to render the count. So whenever the count changes it wil re-render the decrease button. But, we as an application developer knw that it is being only used when we click onClick. It is not neing used to render anything.
+So., you shouldn't re-render whenever count changes Button or whole thing.
